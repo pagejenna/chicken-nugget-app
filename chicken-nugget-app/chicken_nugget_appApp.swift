@@ -11,7 +11,7 @@ import SwiftUI
 struct chicken_nugget_appApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            LoadingScreenView()
         }
     }
 }
