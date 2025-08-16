@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct IntroductionView: View {
-    private let startAnimationDuration = 5.0
+    private let startAnimationDuration = 12.0
     private let endAnimationDuration = 1.5
     @State private var animationStart = false
     @State private var animationEnd = false
