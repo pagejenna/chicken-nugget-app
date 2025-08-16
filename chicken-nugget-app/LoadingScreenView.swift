@@ -10,39 +10,76 @@ import SwiftUI
 struct LoadingScreenView: View {
     @State var isAnimating = false
     @State private var isRising = false
-    @State private var isRIZZLER = false
+    @State private var Eggwitdth = 400
+    @State private var Eggheight = 100
+    @State private var Eggtype = "egg"
+    
     
     var body: some View {
         ZStack{
             Color.yellow
-                        .ignoresSafeArea()
+                .ignoresSafeArea()
             VStack {
                 
-                Image(systemName: "globe")
-                    .imageScale(.large)
+                Image(Eggtype)
+                    .resizable()
+                    .scaledToFit()
                     .foregroundStyle(.tint)
-                    
-                                    .frame(width: 200, height: 5)
-                                    .offset(y: isRising ? 0 : 50) //
-                                    .animation(.easeOut(duration: 0.5), value: isRising)
-                                    .opacity(isRising ? 1 : 0)
-                                   
+                
+                    .frame(width: CGFloat(Eggwitdth), height: CGFloat(Eggheight))
+                    //.offset(y: isRising ? 0 : 50) //
+                    .scaleEffect(isRising ? 2 : 0)
+                    .animation(.bouncy,value: isRising)
+                    .offset(x: isRising ? -10 : 10)
+                    .animation(.default.repeatCount(5, autoreverses: true), value: isRising)
+                    //.animation(.bouncy(duration: 0.5), value: isRising)
+                    //.opacity(isRising ? 1 : 0)
+                
                 Text("Presented by")
                     .scaleEffect(isAnimating ? 2 : 0)
                     .animation(.bouncy,value: isAnimating)
                 Text("chicen nuget studios")
                     .scaleEffect(isAnimating ? 2 : 0)
                     .animation(.bouncy,value: isAnimating)
-                Button("Start") {
-                    isAnimating.toggle()
-                    isRising.toggle()
+            
+                .onAppear {
+                    // Wait 5 seconds before starting animations
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                        withAnimation {
+                            isRising = true
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            withAnimation {
+                                Eggtype = "eggcrack"
+                                Eggheight = 400
+                                Eggwitdth = 100
+
+
+                            }
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                            withAnimation {
+                                Eggtype = "hatch"
+                                Eggheight = 400
+                                Eggwitdth = 200
+
+
+                            }
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                            withAnimation {
+                                isAnimating = true
+                            }
+                        }
+                    }
                 }
             }
-            .padding()
+                    .padding()
+                }
+            }
         }
-    }
-}
-
-#Preview {
-    LoadingScreenView()
-}
+        
+        #Preview {
+            LoadingScreenView()
+        }
+    
