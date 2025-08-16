@@ -25,8 +25,11 @@ struct CrossyRoadView: View {
                     Rectangle()
                         .containerRelativeFrame(.vertical, count: 5, spacing: 110)
                         .foregroundColor(.white)
-                    Text("--        --        --        --        --        --        --")
+                    Text("---           ---            ---           ---          ---")
                         .foregroundColor(.black)
+                    Text("🚗")
+                    Text("🚕")
+                    
                 }
                 ZStack{
                     Rectangle()
@@ -39,8 +42,10 @@ struct CrossyRoadView: View {
                     Rectangle()
                         .containerRelativeFrame(.vertical, count: 5, spacing: 110)
                         .foregroundColor(.white)
-                    Text("--        --        --        --        --        --        --")
+                    Text("---           ---            ---           ---          ---")
                         .foregroundColor(.black)
+                    Text("🚗")
+                    Text("🚕")
                 }
                 ZStack{
                     Rectangle()
@@ -53,8 +58,10 @@ struct CrossyRoadView: View {
                     Rectangle()
                         .containerRelativeFrame(.vertical, count: 5, spacing: 110)
                         .foregroundColor(.white)
-                    Text("--        --        --        --        --        --        --")
+                    Text("---           ---            ---           ---          ---")
                         .foregroundColor(.black)
+                    Text("🚗")
+                    Text("🚕")
                 }
                 ZStack{
                     Rectangle()
