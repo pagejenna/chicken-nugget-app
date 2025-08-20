@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CrossyRoadView: View {
+    @State private var speed = 10;
     var body: some View {
         ZStack{
             Color.yellow
