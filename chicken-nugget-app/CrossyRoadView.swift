@@ -6,10 +6,14 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct CrossyRoadView: View {
-    @State private var speed = 10;
+    @State private var speed = 5.0;
+    @State private var isCollide = false;
+    @State private var isAnimating = true;
     var body: some View {
+       
         ZStack{
             Color.yellow
                 .ignoresSafeArea()
@@ -28,7 +32,12 @@ struct CrossyRoadView: View {
                         .foregroundColor(.white)
                     Text("---           ---            ---           ---          ---")
                         .foregroundColor(.black)
+                    //to add rect frame to detect collision and add animation to move the car
                     Text("🚗")
+                        .offset(x: isAnimating ? 50 : 0)
+                        //.animation(.easeInOut(duration: 5), value: true)
+                
+                   
                     Text("🚕")
                     
                 }
