@@ -43,7 +43,6 @@ struct LoadingScreenView: View {
                     .animation(.bouncy,value: isAnimating)
             
                 .onAppear {
-                    // Wait 5 seconds before starting animations
                     DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                         withAnimation {
                             isRising = true
