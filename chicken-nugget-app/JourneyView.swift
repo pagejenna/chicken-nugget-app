@@ -52,13 +52,14 @@ struct JourneyView: View {
                                 escapeType = "EscapeLocked"
                             }
                         }
-                    
+                        
                     }
                     
                     
                     
                     ScrollView {
                         ZStack{
+                            Image("Farm")
                             
                             VStack{
                                 Button {
@@ -85,6 +86,7 @@ struct JourneyView: View {
                                         .frame(width: 150, height: 150)
                                     Spacer()
                                 }
+                                .offset(x: 100, y: 0)
                                 
                                 Button {
                                     if !pongComplete {
@@ -121,6 +123,7 @@ struct JourneyView: View {
                                             .scaledToFit()
                                             .frame(width: 150, height: 150)
                                     }
+                                    .offset(x: -75, y: 0)
                                     
                                     
                                 }
@@ -128,17 +131,18 @@ struct JourneyView: View {
                             }
                             
                         }
-                            
-                        }
-                        
                         
                     }
                     
+                    
                 }
-                .navigationTitle("The Journey")
+                
             }
+            .navigationTitle("The Journey")
         }
     }
+}
+
 
 
 #Preview {
