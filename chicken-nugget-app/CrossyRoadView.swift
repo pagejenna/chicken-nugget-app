@@ -9,9 +9,11 @@ import SwiftUI
 import UIKit
 
 struct CrossyRoadView: View {
-    @State var danger = false
-    @State private var rectColor = Color.green
-    private let colors: [Color] = [.red, .green]
+    @State var count = 0
+    @State var chickenOffset = 300.0
+    let timer = Timer.publish(every: 2, on: .main, in: .common).autoconnect()
+    @State var rectColorOne = Color.green
+    @State var rectColorTwo = Color.red
     var body: some View {
         ZStack{
             Color.yellow
@@ -19,38 +21,55 @@ struct CrossyRoadView: View {
             VStack{
                 Rectangle()
                     .containerRelativeFrame(.vertical, count: 5, spacing: 110)
-                    .foregroundColor(rectColor)
+                    .foregroundColor(Color.green)
                 Rectangle()
                     .containerRelativeFrame(.vertical, count: 5, spacing: 110)
-                    .foregroundColor(rectColor)
+                    .onReceive(timer) { _ in
+                        if count % 2 == 0{
+                            rectColorOne = Color.red
+                        }
+                        if count % 3 == 0{
+                            rectColorOne = Color.green
+                        }
+                        if count % 5 == 0{
+                            rectColorTwo = Color.red
+                        }
+                        else if count % 7 == 0{
+                            rectColorTwo = Color.green
+                        }
+                        count += 1
+                    }
+                    .foregroundColor(rectColorOne)
+                
                 Rectangle()
                     .containerRelativeFrame(.vertical, count: 5, spacing: 110)
-                    .foregroundColor(rectColor)
+                    .foregroundColor(rectColorTwo)
                 Rectangle()
                     .containerRelativeFrame(.vertical, count: 5, spacing: 110)
-                    .foregroundColor(rectColor)
+                    .foregroundColor(rectColorOne)
                 Rectangle()
                     .containerRelativeFrame(.vertical, count: 5, spacing: 110)
-                    .foregroundColor(rectColor)
+                    .foregroundColor(rectColorTwo)
                 Rectangle()
                     .containerRelativeFrame(.vertical, count: 5, spacing: 110)
-                    .foregroundColor(rectColor)
+                    .foregroundColor(rectColorOne)
                 Rectangle()
                     .containerRelativeFrame(.vertical, count: 5, spacing: 110)
-                    .foregroundColor(rectColor)
+                    .foregroundColor(rectColorTwo)
                 Rectangle()
                     .containerRelativeFrame(.vertical, count: 5, spacing: 110)
-                    .foregroundColor(rectColor)
+                    .foregroundColor(rectColorOne)
                 Rectangle()
                     .containerRelativeFrame(.vertical, count: 5, spacing: 110)
-                    .foregroundColor(rectColor)
-                Rectangle()
-                    .containerRelativeFrame(.vertical, count: 5, spacing: 110)
-                    .foregroundColor(rectColor)
+                    .foregroundColor(rectColorTwo)
             }
-            
-            
+            Text("🐓")
+                .scaleEffect(2)
+                .offset(y:chickenOffset)
 
+        }
+        .onTapGesture {
+            chickenOffset -= 75
         }
     }
 }
