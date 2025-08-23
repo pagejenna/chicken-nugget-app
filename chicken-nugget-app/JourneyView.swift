@@ -12,9 +12,12 @@ struct JourneyView: View {
     @State private var game = 0
     @State var isAnimating = false
     @State var pongType = "PongLogo"
+    @State var crossType = "CrossLogoLocked"
+    @State var escapeType = "EscapeLocked"
     @State var pongComplete = false
+    @State var crossComplete = false
     var body: some View {
-       
+        
         
         NavigationStack{
             
@@ -28,37 +31,103 @@ struct JourneyView: View {
                     Button("complete pong") {  pongComplete.toggle()
                         
                         if !pongComplete {
-                        pongType = "PongLogo"
+                            pongType = "PongLogo"
                         }else{
                             pongType = "PongLogoDone"
+                            crossType = "CrossLogo"
                         }
+                    }
+                    Button("complete cross") {
+                        if !pongComplete {
+                            crossType = "CrossLogoLocked"
+                        }else{
+                            
+                            if !crossComplete {
+                                crossComplete.toggle()
+                                crossType = "CrossLogoDone"
+                                escapeType = "Escape"
+                            }else{
+                                crossComplete.toggle()
+                                crossType = "CrossLogo"
+                                escapeType = "EscapeLocked"
+                            }
+                        }
+                    
                     }
                     
                     
+                    
                     ScrollView {
-                        
-                        
-                        
-                        
+                        ZStack{
                             
-                            HStack{
-                                
-                                Spacer()
+                            VStack{
                                 Button {
-                                    game = 1
-                                    
+                                    if !crossComplete {
+                                        
+                                    }else{
+                                        game = 3
+                                    }
                                     
                                 } label: {
-                                    Image(pongType)
+                                    Image(escapeType)
+                                        .resizable()
+                                        .scaledToFit()
+                                    
+                                        .frame(width: 150, height: 150)
+                                }
+                                .offset(x: -100, y: 50)
+                                
+                                HStack{
+                                    
+                                    Image("Footsteps1")
                                         .resizable()
                                         .scaledToFit()
                                         .frame(width: 150, height: 150)
+                                    Spacer()
                                 }
                                 
+                                Button {
+                                    if !pongComplete {
+                                        
+                                    }else{
+                                        game = 2
+                                    }
+                                    
+                                } label: {
+                                    Image(crossType)
+                                        .resizable()
+                                        .scaledToFit()
+                                    
+                                        .frame(width: 150, height: 150)
+                                }
+                                .offset(x: -50, y: 0)
+                                
+                                Image("Footsteps1")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 150, height: 150)
+                                
+                                
+                                HStack{
+                                    
+                                    Spacer()
+                                    Button {
+                                        game = 1
+                                        
+                                        
+                                    } label: {
+                                        Image(pongType)
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: 150, height: 150)
+                                    }
+                                    
+                                    
+                                }
                                 
                             }
                             
-                          
+                        }
                             
                         }
                         
@@ -66,7 +135,7 @@ struct JourneyView: View {
                     }
                     
                 }
-                .navigationTitle("        The Journey")
+                .navigationTitle("The Journey")
             }
         }
     }
