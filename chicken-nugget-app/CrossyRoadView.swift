@@ -10,11 +10,7 @@ import UIKit
 
 struct CrossyRoadView: View {
     @State var count = 0
-<<<<<<< Updated upstream
-    @State var chickenOffset = 350.0
-=======
     @State var chickenOffset = 400.0
->>>>>>> Stashed changes
     let timer = Timer.publish(every: 2, on: .main, in: .common).autoconnect()
     @State var rectColorOne = Color.green
     @State var rectColorTwo = Color.red

@@ -12,10 +12,16 @@ struct SwiftUIView: View {
     @State private var counter = 0
     @State private var color2: Color = .green
     @State private var counter2 = 0
+    @State private var color3: Color = .green
+    @State private var counter3 = 0
+    @State private var color4: Color = .green
+    @State private var counter4 = 0
     
     // Timer ticks every 1 second
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     let timer2 = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    let timer3 = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    let timer4 = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
         VStack(spacing: 12) {
@@ -27,6 +33,16 @@ struct SwiftUIView: View {
                     .shadow(radius: 4)
             Rectangle()
                 .fill(color2)
+                .frame(height: 80)
+                .cornerRadius(12)
+                .shadow(radius: 4)
+            Rectangle()
+                .fill(color3)
+                .frame(height: 80)
+                .cornerRadius(12)
+                .shadow(radius: 4)
+            Rectangle()
+                .fill(color4)
                 .frame(height: 80)
                 .cornerRadius(12)
                 .shadow(radius: 4)
@@ -63,7 +79,39 @@ struct SwiftUIView: View {
                 counter2 = 0
             }
         }
+        .padding()
+        .onReceive(timer3) { _ in
+            counter3 += 1
+            
+            switch counter3 {
+            case 1, 5, 6:
+                color3 = .green
+            case 2,3:
+                color3 = .yellow
+            case 4:
+                color3 = .red
+            default:
+                counter3 = 0
+            }
+       }
+        .padding()
+        .onReceive(timer4) { _ in
+            counter4 += 1
+            
+            switch counter4 {
+            case 1,2,3,6:
+                color4 = .green
+            case 4:
+                color4 = .yellow
+            case 5:
+                color4 = .red
+            default:
+                counter4 = 0
+            }
+       }
     }
+    
+    
 }
 
 
