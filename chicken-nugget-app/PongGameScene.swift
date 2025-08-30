@@ -30,11 +30,22 @@ import SwiftUI
         ball.name = "ball"
         addChild(ball)
         
+        
+        let bounds = view.bounds
+        let floorPath = CGMutablePath()
+        let bottomLeftCorner = CGPoint(x: bounds.minX, y: bounds.minY)
+        let bottomRightCorner = CGPoint(x: bounds.maxX, y: bounds.minY)
+        floorPath.move(to: bottomLeftCorner)
+        floorPath.addLine(to: bottomRightCorner)
+        let floor = SKShapeNode(path: floorPath)
+        floor.strokeColor = .white
+        
+        addChild(floor)
+        
         // add bin box
         let rect = CGRect(x: 150, y: 20, width: 100, height: 20) //implement drag gesture to move bar?
-        Rectangle()
-            .fill(.red)
-            .frame(rect)
+        let boxrect = SKShapeNode(rect: rect)
+        boxrect.fillColor = .green
         let path = CGMutablePath()
         let topLeft = CGPoint(x: rect.minX, y: rect.maxY)
         let bottomLeft = CGPoint(x: rect.minX, y: rect.minY)
@@ -51,18 +62,9 @@ import SwiftUI
         hollowBox.zPosition = -1
         hollowBox.physicsBody = SKPhysicsBody(edgeChainFrom: path)
         
+        addChild(boxrect)
         addChild(hollowBox)
-        
-        let bounds = view.bounds
-        let floorPath = CGMutablePath()
-        let bottomLeftCorner = CGPoint(x: bounds.minX, y: bounds.minY)
-        let bottomRightCorner = CGPoint(x: bounds.maxX, y: bounds.minY)
-        floorPath.move(to: bottomLeftCorner)
-        floorPath.addLine(to: bottomRightCorner)
-        let floor = SKShapeNode(path: floorPath)
-        floor.strokeColor = .white
-        
-        addChild(floor)
+
         
     }
     
