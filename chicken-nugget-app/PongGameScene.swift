@@ -32,6 +32,9 @@ import SwiftUI
         
         // add bin box
         let rect = CGRect(x: 150, y: 20, width: 100, height: 20) //implement drag gesture to move bar?
+        Rectangle()
+            .fill(.red)
+            .frame(rect)
         let path = CGMutablePath()
         let topLeft = CGPoint(x: rect.minX, y: rect.maxY)
         let bottomLeft = CGPoint(x: rect.minX, y: rect.minY)
