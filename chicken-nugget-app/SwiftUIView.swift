@@ -37,7 +37,7 @@ struct SwiftUIView: View {
     var body: some View {
         ZStack {
             
-            
+        
             VStack(spacing: 40) {
                 
                 Rectangle()
