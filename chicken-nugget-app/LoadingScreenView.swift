@@ -17,7 +17,8 @@ struct LoadingScreenView: View {
     
     var body: some View {
         ZStack{
-            Color.yellow
+            Color.blue
+                .brightness(+0.25)
                 .ignoresSafeArea()
             VStack {
                 
