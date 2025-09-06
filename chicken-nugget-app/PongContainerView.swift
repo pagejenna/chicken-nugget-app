@@ -77,24 +77,6 @@ struct PongContainerView<Content: View>: View {
                     .multilineTextAlignment(.center)
             }
             
-            Spacer()
-            
-            Button("Reset Experience") {
-                withAnimation {
-                    state = .playing
-                    isContentVisible = true
-                    isContentDespawned = false
-                } completion: {
-                    supplementalDescription = nil
-                    withAnimation {
-                        isCircleShrunk = false
-                    }
-                }
-            }
-            .offset(y: isContentDespawned ? 0 : 100)
-            .padding()
-            .disabled(!isContentDespawned)
-            
         }
     }
 }

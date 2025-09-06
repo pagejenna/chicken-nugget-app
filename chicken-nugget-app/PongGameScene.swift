@@ -12,22 +12,24 @@ import SwiftUI
 @Observable class PongGameScene: SKScene {
     var taskCompleted = false
     var lastTapped: CGPoint = .zero
-    var dampingFactor = 0.05
+    var dampingFactor = 0.08
     
     override func didMove(to view: SKView) {
         self.physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
         self.size = view.frame.size
         self.lastTapped = CGPoint(x: self.size.width / 2, y: self.size.height / 2)
         self.backgroundColor = .clear
+        self.physicsWorld.gravity = CGVector(dx: 0, dy: -1.8)
         
         // spawn ball
-        let location = CGPoint(x: 195, y: 200)
         let ball = SKShapeNode(circleOfRadius: 10)
         ball.fillColor = .blue
-        ball.position = location
+        ball.position = CGPoint(x: 150, y: 650)
         ball.physicsBody = SKPhysicsBody(circleOfRadius: 10)
         ball.physicsBody!.affectedByGravity = true
+        ball.physicsBody?.restitution = 0.6
         ball.name = "ball"
+        
         addChild(ball)
         
         
@@ -38,67 +40,56 @@ import SwiftUI
         floorPath.move(to: bottomLeftCorner)
         floorPath.addLine(to: bottomRightCorner)
         let floor = SKShapeNode(path: floorPath)
+        floor.name = "floor"
         floor.strokeColor = .white
         
         addChild(floor)
         
-        // add bin box
-        let rect = CGRect(x: 0, y: 0, width: 100, height: 20)
-        let path = CGMutablePath()
-        let topLeft = CGPoint(x: rect.minX, y: rect.maxY)
-        let bottomLeft = CGPoint(x: rect.minX, y: rect.minY)
-        let bottomRight = CGPoint(x: rect.maxX, y: rect.minY)
-        let topRight = CGPoint(x: rect.maxX, y: rect.maxY)
-        path.move(to: topLeft)
-        path.addLine(to: bottomLeft)
-        path.addLine(to: bottomRight)
-        path.addLine(to: topRight)
-        let hollowBox = SKShapeNode(path: path)
+        let hollowBox = SKShapeNode(rect: CGRect(x: 0, y: 0, width: 100, height: 20))
         hollowBox.strokeColor = .white
         hollowBox.name = "bin"
         hollowBox.fillColor = .green
         hollowBox.zPosition = -1
-        hollowBox.physicsBody = SKPhysicsBody(edgeChainFrom: path)
+        hollowBox.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 100, height: 20))
+        hollowBox.physicsBody?.allowsRotation = false
     
         addChild(hollowBox)
-
-        
     }
     
     override func didChangeSize(_ oldSize: CGSize) {
         self.physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
     }
+    
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?){
         guard let touch = touches.first else { return }
-    }
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else { return }
         let location = touch.location(in: self.view)
-        
         withAnimation {
-            lastTapped = location
+            lastTapped = CGPoint(x: location.x, y: 60)
         }
-        print(lastTapped)
     }
-    
     
     func fireBall() {
         if let ball = childNode(withName: "ball") {
             // Find difference between ball position and tap position then make a vector
-            let difference = CGVector(dx: dampingFactor * (lastTapped.x - ball.position.x), dy: dampingFactor * (lastTapped.y - ball.position.y))
+            let difference = CGVector(dx: dampingFactor * (lastTapped.x + ball.position.x), dy: dampingFactor * (lastTapped.y + ball.position.y))
             ball.physicsBody?.applyImpulse(difference)
-            
         }
+    }
+    func restart() {
+        if let ball = childNode(withName: "ball"){
+            ball.position = CGPoint(x: 150, y: 650)
+        }
+        
     }
     
     override func update(_ currentTime: TimeInterval) {
-        
-        if let ball = childNode(withName: "ball"), let bin = childNode(withName: "bin") as? SKShapeNode {
+        if let floor = childNode(withName: "floor"), let ball = childNode(withName: "ball"), let bin = childNode(withName: "bin") as? SKShapeNode {
             bin.position = lastTapped
             if bin.contains(ball.position) {
                 fireBall()
-            } else {
-                bin.fillColor = .red
+            }
+            if floor.contains(ball.position){
+                print("game over")
             }
         }
     }
