@@ -43,9 +43,7 @@ import SwiftUI
         addChild(floor)
         
         // add bin box
-        let rect = CGRect(x: 150, y: 20, width: 100, height: 20) //implement drag gesture to move bar?
-        let boxrect = SKShapeNode(rect: rect)
-        boxrect.fillColor = .green
+        let rect = CGRect(x: 0, y: 0, width: 100, height: 20)
         let path = CGMutablePath()
         let topLeft = CGPoint(x: rect.minX, y: rect.maxY)
         let bottomLeft = CGPoint(x: rect.minX, y: rect.minY)
@@ -58,11 +56,10 @@ import SwiftUI
         let hollowBox = SKShapeNode(path: path)
         hollowBox.strokeColor = .white
         hollowBox.name = "bin"
-        hollowBox.fillColor = .red
+        hollowBox.fillColor = .green
         hollowBox.zPosition = -1
         hollowBox.physicsBody = SKPhysicsBody(edgeChainFrom: path)
-        
-        addChild(boxrect)
+    
         addChild(hollowBox)
 
         
@@ -71,7 +68,9 @@ import SwiftUI
     override func didChangeSize(_ oldSize: CGSize) {
         self.physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
     }
-    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?){
+        guard let touch = touches.first else { return }
+    }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         let location = touch.location(in: self.view)
@@ -86,7 +85,6 @@ import SwiftUI
     func fireBall() {
         if let ball = childNode(withName: "ball") {
             // Find difference between ball position and tap position then make a vector
-            
             let difference = CGVector(dx: dampingFactor * (lastTapped.x - ball.position.x), dy: dampingFactor * (lastTapped.y - ball.position.y))
             ball.physicsBody?.applyImpulse(difference)
             
@@ -94,14 +92,15 @@ import SwiftUI
     }
     
     override func update(_ currentTime: TimeInterval) {
-            if let ball = childNode(withName: "ball"), let bin = childNode(withName: "bin") as? SKShapeNode {
-                
-                if bin.contains(ball.position) {
-                    fireBall()
-                } else {
-                    bin.fillColor = .red
-                }
+        
+        if let ball = childNode(withName: "ball"), let bin = childNode(withName: "bin") as? SKShapeNode {
+            bin.position = lastTapped
+            if bin.contains(ball.position) {
+                fireBall()
+            } else {
+                bin.fillColor = .red
             }
         }
+    }
     
 }
