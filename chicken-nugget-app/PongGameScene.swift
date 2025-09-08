@@ -9,7 +9,7 @@ import Foundation
 import SpriteKit
 import SwiftUI
 
-@Observable class PongGameScene: SKScene {
+class PongGameScene: SKScene {
     var taskCompleted = false
     var lose = false
     var lastTapped: CGPoint = .zero
@@ -44,6 +44,8 @@ import SwiftUI
         let floor = SKShapeNode(path: floorPath)
         floor.name = "floor"
         floor.strokeColor = .red
+        floor.physicsBody?.restitution = 0
+        floor.physicsBody?.linearDamping = 0
         
         addChild(floor)
         
@@ -74,13 +76,14 @@ import SwiftUI
     func fireBall() {
         if let ball = childNode(withName: "ball") {
             // Find difference between ball position and tap position then make a vector
-            let difference = CGVector(dx: dampingFactor * (lastTapped.x + ball.position.x), dy: dampingFactor * (lastTapped.y + ball.position.y))
+            let difference = CGVector(dx: dampingFactor * (ball.position.x), dy: dampingFactor * (2 * ball.position.y))
             ball.physicsBody?.applyImpulse(difference)
         }
     }
     func start() {
         if let ball = childNode(withName: "ball"){
             ball.position = CGPoint(x: 150, y: 700)
+            lose = false
         }
         withAnimation{
             lastTapped = CGPoint(x: 100, y: 60)
@@ -88,9 +91,8 @@ import SwiftUI
     }
     
     func checkLose() -> Bool {
-        if let floor = childNode(withName: "floor"), let ball = childNode(withName: "ball"){
-            if ball.position.y < ball.frame.height/2 && ball.position.y > 0{
-                floor.physicsBody?.restitution = 0
+        if let ball = childNode(withName: "ball"){
+            if ball.position.y < ball.frame.height && ball.position.y > 0{
                 print("hit")
                 return true
             }
@@ -101,10 +103,13 @@ import SwiftUI
     override func update(_ currentTime: TimeInterval) {
         if let ball = childNode(withName: "ball"), let bin = childNode(withName: "bin") as? SKShapeNode {
             bin.position = lastTapped
-            if bin.contains(ball.position) {
-                fireBall()
+            if !lose {
+                lose = checkLose()
+                if bin.contains(ball.position) {
+                    fireBall()
+                }
+                
             }
-            lose = checkLose()
         }
     }
     

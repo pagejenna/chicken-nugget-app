@@ -21,14 +21,9 @@ import SwiftUI
 
 @main
 struct papertossApp: App {
-    @State var gameState: GameState = .playing
-    @State var string: String? = ""
     var body: some Scene {
         WindowGroup {
-            PongContainerView(state: $gameState, supplementalDescription: $string) {
-                PongContentView(gameState: $gameState)
-            }
-
+                PongContentView()
         }
     }
 }
