@@ -12,6 +12,8 @@ import SwiftUI
 struct EndingView: View {
     @State private var isAnimate = false
     @State private var Offset = 350
+    @State private var scrollup = false
+    @State private var Offset2 = 350
     var body: some View {
         ZStack {
             Color.blue
@@ -19,8 +21,12 @@ struct EndingView: View {
                 .brightness(-0.5)
           
                 
-                
+            VStack{
+                Text("TESTTTTttttttt")
+                    .offset(x:0, y:250)
+                            
                 HStack{
+                  
                     VStack{
                         Image("Skyline")
                             .offset(x: CGFloat(Offset) + 275, y:10)
@@ -39,6 +45,8 @@ struct EndingView: View {
                             .foregroundColor(Color.green)
                             .offset(x: CGFloat(Offset), y:0)
                             .frame(width: 1000)
+                    }
+                 
                     }
                 }
                     
@@ -71,6 +79,11 @@ struct EndingView: View {
                     isAnimate = true
                     
                 }
+                
+                
+            
+        
+                
                     
                 }
             }

@@ -78,7 +78,7 @@ struct SwiftUIView: View {
                         
                         health -= 5
                         if health == 0{
-                            chicenOffset = 0
+                            chicenOffset = -70
                             health = 15
                         }
                     }
@@ -105,7 +105,7 @@ struct SwiftUIView: View {
                         
                         health -= 5
                         if health == 0{
-                            chicenOffset = 0
+                            chicenOffset = -70
                             health = 15
                         }
                     }
@@ -131,7 +131,7 @@ struct SwiftUIView: View {
                         
                         health -= 5
                         if health == 0{
-                            chicenOffset = 0
+                            chicenOffset = -70
                             health = 15
                         }
                     }
@@ -157,7 +157,7 @@ struct SwiftUIView: View {
                         
                         health -= 5
                         if health == 0{
-                            chicenOffset = 0
+                            chicenOffset = -70
                             health = 15
                         }
                     }
@@ -185,7 +185,7 @@ struct SwiftUIView: View {
                         
                         health -= 5
                         if health == 0{
-                            chicenOffset = 0
+                            chicenOffset = -70
                             health = 15
                         }
                     }
@@ -236,6 +236,7 @@ struct SwiftUIView: View {
                 Text("up")
                 
             }
+
             Spacer()
             Text("\(health)")
             
