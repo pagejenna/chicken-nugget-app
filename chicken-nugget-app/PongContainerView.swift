@@ -25,15 +25,6 @@ struct PongContainerView<Content: View>: View {
         if isContentVisible {
             ZStack(alignment: .topTrailing) {
                 content()
-                
-                Button("Reset") {
-                    withAnimation {
-                        state = .failure
-                        supplementalDescription = nil
-                    }
-                }
-                .buttonStyle(.borderedProminent)
-                .padding()
             }
             .mask {
                 Circle()
