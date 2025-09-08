@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-
-
 struct EndingView: View {
     @State private var isAnimate = false
     @State private var Offset = 350
@@ -19,14 +17,14 @@ struct EndingView: View {
             Color.blue
                 .ignoresSafeArea()
                 .brightness(-0.5)
-          
-                
+            
+            
             VStack{
                 Text("TESTTTTttttttt")
                     .offset(x:0, y:250)
-                            
+                
                 HStack{
-                  
+                    
                     VStack{
                         Image("Skyline")
                             .offset(x: CGFloat(Offset) + 275, y:10)
@@ -46,21 +44,15 @@ struct EndingView: View {
                             .offset(x: CGFloat(Offset), y:0)
                             .frame(width: 1000)
                     }
-                 
-                    }
-                }
                     
-                
-                
-                
+                }
+            }
             
             Image("chick")
                 .offset(x: CGFloat(Offset) + 200, y:100)
             Text("The end")
                 .scaleEffect(isAnimate ? 2 : 0)
                 .animation(.bouncy,value: isAnimate)
-         
-            //chicken image
         }
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
@@ -69,7 +61,6 @@ struct EndingView: View {
                     for _ in 1...50 {
                         Offset -= 10
                     }
-                    
                 }
             }
         }
@@ -79,17 +70,9 @@ struct EndingView: View {
                     isAnimate = true
                     
                 }
-                
-                
-            
-        
-                
-                    
-                }
             }
         }
-    
-
+    }
     
 }
 #Preview {

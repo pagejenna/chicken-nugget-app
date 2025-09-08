@@ -44,125 +44,88 @@ struct JourneyView: View {
         
         
         NavigationStack{
-            
-            
             ZStack{
                 Color.green
                     .ignoresSafeArea()
-                //
                 VStack{
                     Text("\(game)")
-//                    Button("complete cross") {
-//                        if !pongComplete {
-//                            crossType = "CrossLogoLocked"
-//                        }else{
-//                            
-//                            if !crossComplete {
-//                                crossComplete.toggle()
-//                                crossType = "CrossLogoDone"
-//                                escapeType = "Escape"
-//                            }else{
-//                                crossComplete.toggle()
-//                                crossType = "CrossLogo"
-//                                escapeType = "EscapeLocked"
-//                            }
-//                        }
-//                        
-//                    }
-                    
-                    
-                    
-                    ScrollView {
-                        ZStack{
-                            Image("Farm")
-                            
-                            VStack{
+                    ZStack{
+                        Image("Farm")
+                        
+                        VStack{
                             NavigationLink {
-                                    if !crossComplete {
-                                        
-                                    }else{
-                                        EndingView()
-                                        
-                                    }
+                                if !crossComplete {
                                     
-                                } label: {
-                                    Image(escapeType)
-                                        .resizable()
-                                        .scaledToFit()
+                                }else{
+                                    EndingView()
                                     
-                                        .frame(width: 150, height: 150)
                                 }
-                                .offset(x: -100, y: 50)
                                 
-                                HStack{
-                                    
-                                    Image("Footsteps1")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 150, height: 150)
-                                    Spacer()
-                                }
-                                .offset(x: 100, y: 0)
+                            } label: {
+                                Image(escapeType)
+                                    .resizable()
+                                    .scaledToFit()
                                 
-                                NavigationLink {
-                                    if !pongComplete {
-                                        
-                                    }else{
-                                        SwiftUIView(
-                                            
-                                            crossComplete: $crossComplete)
-                                        .ignoresSafeArea()
-                                    }
-                                    
-                                } label: {
-                                    Image(crossType)
-                                        .resizable()
-                                        .scaledToFit()
-                                    
-                                        .frame(width: 150, height: 150)
-                                }
-                                .offset(x: -50, y: 0)
+                                    .frame(width: 150, height: 150)
+                            }
+                            .offset(x: -100, y: 50)
+                            
+                            HStack{
                                 
                                 Image("Footsteps1")
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 150, height: 150)
-                                
-                                
-                                HStack{
+                                Spacer()
+                            }
+                            .offset(x: 100, y: 0)
+                            
+                            NavigationLink {
+                                if !pongComplete {
                                     
-                                    Spacer()
-                                    NavigationLink {
-                                        PongContentView(pongComplete: $pongComplete)
+                                }else{
+                                    SwiftUIView(
                                         
-                                        
-                                    } label: {
-                                        Image(pongType)
-                                            .resizable()
-                                            .scaledToFit()
-                                            .frame(width: 150, height: 150)
-                                    }
-                                    .offset(x: -75, y: 0)
-                                    
-                                    
+                                        crossComplete: $crossComplete)
+                                    .ignoresSafeArea()
                                 }
                                 
+                            } label: {
+                                Image(crossType)
+                                    .resizable()
+                                    .scaledToFit()
+                                
+                                    .frame(width: 150, height: 150)
                             }
+                            .offset(x: -50, y: 0)
                             
+                            Image("Footsteps1")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 150, height: 150)
                             
-                            
+                            HStack{
+                                Spacer()
+                                NavigationLink {
+                                    PongContentView(pongComplete: $pongComplete)
+                                } label: {
+                                    Image(pongType)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 150, height: 150)
+                                }
+                                .offset(x: -75, y: 0)
+                            }
                         }
-                        
-                        
-                        
-                        
                     }
-                    .navigationTitle("The Journey")
+                    
                 }
+                .navigationTitle("The Journey")
             }
         }
     }
 }
+
 
 
 

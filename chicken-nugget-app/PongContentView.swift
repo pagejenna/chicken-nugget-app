@@ -69,20 +69,20 @@ struct PongContentView: View {
                         
                         Text("you won !!")
                             .foregroundStyle(Color.white)
-                             .font(.largeTitle)
-                             .phaseAnimator([0,1], content: { content, phase in
-                                 content.scaleEffect(phase) }, animation: { _ in
-                                     .bouncy
-                             })
+                            .font(.largeTitle)
+                            .phaseAnimator([0,1], content: { content, phase in
+                                content.scaleEffect(phase) }, animation: { _ in
+                                        .bouncy
+                                })
                     }
                     if gameState == .lose {
                         Text("you lost !!")
                             .foregroundStyle(Color.white)
-                             .font(.largeTitle)
-                             .phaseAnimator([0,1], content: { content, phase in
-                                 content.scaleEffect(phase) }, animation: { _ in
-                                     .bouncy
-                             })
+                            .font(.largeTitle)
+                            .phaseAnimator([0,1], content: { content, phase in
+                                content.scaleEffect(phase) }, animation: { _ in
+                                        .bouncy
+                                })
                         
                     }
                     

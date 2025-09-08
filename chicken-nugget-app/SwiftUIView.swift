@@ -27,10 +27,7 @@ struct SwiftUIView: View {
     @State private var health = 15
     @State private var completed = 0
     @Binding var crossComplete: Bool
-   
-   
     
-    // Timer ticks every 1 second
     let timer = Timer.publish(every: 0.35, on: .main, in: .common).autoconnect()
     let timer2 = Timer.publish(every: 0.35, on: .main, in: .common).autoconnect()
     let timer3 = Timer.publish(every: 0.35, on: .main, in: .common).autoconnect()
@@ -86,7 +83,6 @@ struct SwiftUIView: View {
                             health = 15
                         }
                     }
-                    //-540,-630
                 default:
                     counter = 0
                 }
@@ -202,22 +198,21 @@ struct SwiftUIView: View {
                     .resizable()
             }
             VStack{
-            
-            Text("\(chicenOffset)")
-            if chicenOffset < -650{
-               
-                Text("YOU WIN!")
-                    .font(.largeTitle)
-                    .phaseAnimator([0,1], content: { content, phase in
-                        content.scaleEffect(phase)
-                        
-                    }, animation: { _ in
-                            .bouncy
-                    })
+                Text("\(chicenOffset)")
+                if chicenOffset < -650{
+                    
+                    Text("YOU WIN!")
+                        .font(.largeTitle)
+                        .phaseAnimator([0,1], content: { content, phase in
+                            content.scaleEffect(phase)
+                            
+                        }, animation: { _ in
+                                .bouncy
+                        })
+                    
+                    
+                }
                 
-                
-            }
-            
             }
         }
         HStack{
@@ -229,12 +224,6 @@ struct SwiftUIView: View {
                 if completed == 0{
                     chicenOffset -= 10
                 }
-                
-                
-                
-                
-                
-                
                 
             }label:{
                 
@@ -248,7 +237,7 @@ struct SwiftUIView: View {
             Button{
                 if chicenOffset < -650{
                     completed = 1
-                  
+                    
                 }
                 if completed == 0{
                     chicenOffset += 10
@@ -260,16 +249,9 @@ struct SwiftUIView: View {
                 
                 
             }
-            
         }
         Text("🐓")
-            .offset(y:CGFloat(chicenOffset)
-                    
-                    
-                    
-                    
-            )
-        
+            .offset(y:CGFloat(chicenOffset))
     }
 }
 

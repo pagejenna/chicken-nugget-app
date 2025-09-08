@@ -57,7 +57,7 @@ class PongGameScene: SKScene {
         hollowBox.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 100, height: 20))
         hollowBox.physicsBody?.allowsRotation = false
         hollowBox.physicsBody!.affectedByGravity = false
-    
+        
         addChild(hollowBox)
     }
     

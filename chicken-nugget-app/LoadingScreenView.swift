@@ -28,13 +28,13 @@ struct LoadingScreenView: View {
                     .foregroundStyle(.tint)
                 
                     .frame(width: CGFloat(Eggwitdth), height: CGFloat(Eggheight))
-                    //.offset(y: isRising ? 0 : 50) //
+                //.offset(y: isRising ? 0 : 50) //
                     .scaleEffect(isRising ? 2 : 0)
                     .animation(.bouncy,value: isRising)
                     .offset(x: isRising ? -10 : 10)
                     .animation(.default.repeatCount(5, autoreverses: true), value: isRising)
-                    //.animation(.bouncy(duration: 0.5), value: isRising)
-                    //.opacity(isRising ? 1 : 0)
+                //.animation(.bouncy(duration: 0.5), value: isRising)
+                //.opacity(isRising ? 1 : 0)
                 
                 Text("Presented by")
                     .scaleEffect(isAnimating ? 2 : 0)
@@ -42,44 +42,44 @@ struct LoadingScreenView: View {
                 Text("chicen nuget studios")
                     .scaleEffect(isAnimating ? 2 : 0)
                     .animation(.bouncy,value: isAnimating)
-            
-                .onAppear {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                        withAnimation {
-                            isRising = true
-                        }
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                
+                    .onAppear {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                             withAnimation {
-                                Eggtype = "eggcrack"
-                                Eggheight = 400
-                                Eggwitdth = 100
-
-
+                                isRising = true
                             }
-                        }
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                            withAnimation {
-                                Eggtype = "hatch"
-                                Eggheight = 400
-                                Eggwitdth = 200
-
-
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                withAnimation {
+                                    Eggtype = "eggcrack"
+                                    Eggheight = 400
+                                    Eggwitdth = 100
+                                    
+                                    
+                                }
                             }
-                        }
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                            withAnimation {
-                                isAnimating = true
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                withAnimation {
+                                    Eggtype = "hatch"
+                                    Eggheight = 400
+                                    Eggwitdth = 200
+                                    
+                                    
+                                }
+                            }
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                                withAnimation {
+                                    isAnimating = true
+                                }
                             }
                         }
                     }
-                }
             }
-                    .padding()
-                }
-            }
+            .padding()
         }
-        
-        #Preview {
-            LoadingScreenView()
-        }
-    
+    }
+}
+
+#Preview {
+    LoadingScreenView()
+}
+
