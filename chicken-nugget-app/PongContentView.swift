@@ -22,6 +22,7 @@ struct PongContentView: View {
     @State var scene: PongGameScene = PongGameScene()
     @State var gameState = GameState.start
     @State var elapsed = 0
+    @Binding var pongComplete: Bool
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     var body: some View {
         ZStack {
@@ -34,8 +35,9 @@ struct PongContentView: View {
                         .onReceive(timer) { _ in
                             if gameState == .playing{
                                 elapsed += 1
-                                if elapsed >= 15{
+                                if elapsed >= 30{
                                     gameState = .win
+                                    pongComplete = true
                                 }
                             }
                             else { elapsed = 0 }
@@ -64,6 +66,7 @@ struct PongContentView: View {
                     .padding()
                     .buttonStyle(.borderedProminent)
                     if gameState == .win {
+                        
                         Text("you won !!")
                             .foregroundStyle(Color.white)
                              .font(.largeTitle)

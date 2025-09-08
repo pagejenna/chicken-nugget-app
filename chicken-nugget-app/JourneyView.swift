@@ -11,11 +11,35 @@ import SwiftUI
 struct JourneyView: View {
     @State private var game = 0
     @State var isAnimating = false
-    @State var pongType = "PongLogo"
-    @State var crossType = "CrossLogoLocked"
-    @State var escapeType = "EscapeLocked"
+    var pongType: String{
+        if pongComplete{
+            "PongLogoDone"
+        }else{
+            "PongLogo"
+        }
+    }
+    var crossType: String{
+        if pongComplete{
+            
+            if crossComplete{
+                "CrossLogoDone"
+            }else{
+                "CrossLogo"
+            }
+        }else{
+            "CrossLogoLocked"
+        }
+    }
+    var escapeType: String{
+        if crossComplete{
+            "Escape"
+        }else{
+            "EscapeLocked"
+        }
+    }
     @State var pongComplete = false
     @State var crossComplete = false
+    
     var body: some View {
         
         
@@ -25,35 +49,26 @@ struct JourneyView: View {
             ZStack{
                 Color.green
                     .ignoresSafeArea()
-                
+                //
                 VStack{
                     Text("\(game)")
-                    Button("complete pong") {  pongComplete.toggle()
-                        
-                        if !pongComplete {
-                            pongType = "PongLogo"
-                        }else{
-                            pongType = "PongLogoDone"
-                            crossType = "CrossLogo"
-                        }
-                    }
-                    Button("complete cross") {
-                        if !pongComplete {
-                            crossType = "CrossLogoLocked"
-                        }else{
-                            
-                            if !crossComplete {
-                                crossComplete.toggle()
-                                crossType = "CrossLogoDone"
-                                escapeType = "Escape"
-                            }else{
-                                crossComplete.toggle()
-                                crossType = "CrossLogo"
-                                escapeType = "EscapeLocked"
-                            }
-                        }
-                        
-                    }
+//                    Button("complete cross") {
+//                        if !pongComplete {
+//                            crossType = "CrossLogoLocked"
+//                        }else{
+//                            
+//                            if !crossComplete {
+//                                crossComplete.toggle()
+//                                crossType = "CrossLogoDone"
+//                                escapeType = "Escape"
+//                            }else{
+//                                crossComplete.toggle()
+//                                crossType = "CrossLogo"
+//                                escapeType = "EscapeLocked"
+//                            }
+//                        }
+//                        
+//                    }
                     
                     
                     
@@ -62,11 +77,12 @@ struct JourneyView: View {
                             Image("Farm")
                             
                             VStack{
-                                Button {
+                            NavigationLink {
                                     if !crossComplete {
                                         
                                     }else{
-                                        game = 3
+                                        EndingView()
+                                        
                                     }
                                     
                                 } label: {
@@ -88,11 +104,14 @@ struct JourneyView: View {
                                 }
                                 .offset(x: 100, y: 0)
                                 
-                                Button {
+                                NavigationLink {
                                     if !pongComplete {
                                         
                                     }else{
-                                        game = 2
+                                        SwiftUIView(
+                                            
+                                            crossComplete: $crossComplete)
+                                        .ignoresSafeArea()
                                     }
                                     
                                 } label: {
@@ -113,8 +132,8 @@ struct JourneyView: View {
                                 HStack{
                                     
                                     Spacer()
-                                    Button {
-                                        game = 1
+                                    NavigationLink {
+                                        PongContentView(pongComplete: $pongComplete)
                                         
                                         
                                     } label: {
@@ -130,15 +149,17 @@ struct JourneyView: View {
                                 
                             }
                             
+                            
+                            
                         }
                         
+                        
+                        
+                        
                     }
-                    
-                    
+                    .navigationTitle("The Journey")
                 }
-                
             }
-            .navigationTitle("The Journey")
         }
     }
 }

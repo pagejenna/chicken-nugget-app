@@ -26,6 +26,9 @@ struct SwiftUIView: View {
     @State private var chicenOffset = -70
     @State private var health = 15
     @State private var completed = 0
+    @Binding var crossComplete: Bool
+   
+   
     
     // Timer ticks every 1 second
     let timer = Timer.publish(every: 0.35, on: .main, in: .common).autoconnect()
@@ -37,7 +40,8 @@ struct SwiftUIView: View {
     var body: some View {
         ZStack {
             
-        
+            
+            
             VStack(spacing: 40) {
                 
                 Rectangle()
@@ -74,7 +78,7 @@ struct SwiftUIView: View {
                 case 6:
                     color = .red
                     unsafe1 = 1
-                    if unsafe1 == 1 && chicenOffset < -540 && chicenOffset > -630 {
+                    if unsafe1 == 1 && chicenOffset < -510 && chicenOffset > -600 {
                         
                         health -= 5
                         if health == 0{
@@ -101,7 +105,7 @@ struct SwiftUIView: View {
                 case 2:
                     color2 = .red
                     unsafe2 = 1
-                    if unsafe2 == 1 && chicenOffset < -430 && chicenOffset > -530 {
+                    if unsafe2 == 1 && chicenOffset < -410 && chicenOffset > -500 {
                         
                         health -= 5
                         if health == 0{
@@ -127,7 +131,7 @@ struct SwiftUIView: View {
                 case 4:
                     color3 = .red
                     unsafe3 = 1
-                    if unsafe3 == 1 && chicenOffset < -320 && chicenOffset > -420 {
+                    if unsafe3 == 1 && chicenOffset < -310 && chicenOffset > -400 {
                         
                         health -= 5
                         if health == 0{
@@ -153,7 +157,7 @@ struct SwiftUIView: View {
                 case 5:
                     color4 = .red
                     unsafe4 = 1
-                    if unsafe4 == 1 && chicenOffset < -210 && chicenOffset > -310 {
+                    if unsafe4 == 1 && chicenOffset < -210 && chicenOffset > -300 {
                         
                         health -= 5
                         if health == 0{
@@ -198,34 +202,35 @@ struct SwiftUIView: View {
                     .resizable()
             }
             VStack{
-                Text("\(chicenOffset)")
-                //-660
-                if chicenOffset < -650{
-                   
-                   Text("YOU WIN!")
-                        .font(.largeTitle)
-                        .phaseAnimator([0,1], content: { content, phase in
-                            content.scaleEffect(phase)
-                            
-                        }, animation: { _ in
-                                .bouncy
-                        })
+            
+            Text("\(chicenOffset)")
+            if chicenOffset < -650{
+               
+                Text("YOU WIN!")
+                    .font(.largeTitle)
+                    .phaseAnimator([0,1], content: { content, phase in
+                        content.scaleEffect(phase)
                         
-                    
-                }
+                    }, animation: { _ in
+                            .bouncy
+                    })
                 
+                
+            }
+            
             }
         }
         HStack{
             Button{
                 if chicenOffset < -650{
+                    crossComplete = true
                     completed = 1
                 }
                 if completed == 0{
                     chicenOffset -= 10
                 }
                 
-               
+                
                 
                 
                 
@@ -236,13 +241,14 @@ struct SwiftUIView: View {
                 Text("up")
                 
             }
-
+            
             Spacer()
             Text("\(health)")
             
             Button{
                 if chicenOffset < -650{
                     completed = 1
+                  
                 }
                 if completed == 0{
                     chicenOffset += 10
@@ -262,14 +268,13 @@ struct SwiftUIView: View {
                     
                     
                     
-    )
-            
+            )
+        
     }
 }
 
 
 
 
-#Preview {
-    SwiftUIView()
-}
+
+
